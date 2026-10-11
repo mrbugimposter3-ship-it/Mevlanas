@@ -1,0 +1,6 @@
+app/out/
+data/
+/KnowBoran-Hifz.apk
+*.keystore
+*.jks
+*.idsig
