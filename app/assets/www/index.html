@@ -1,8 +1,14 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-<title>حفظ</title><style>
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>حفظ KnowBoran</title><meta name="theme-color" content="#062a1f"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><style>
 @font-face{font-family:Amiri;src:url(Amiri.ttf)}
 :root{--g:#0b3d2e;--g2:#14684a;--l:#2ecc71;--t:#e8fff3}
-*{box-sizing:border-box}body{margin:0;background:var(--g);color:var(--t);font-family:sans-serif}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+#v{max-width:900px;margin:0 auto;padding-bottom:env(safe-area-inset-bottom)}
+header{padding-top:max(8px,env(safe-area-inset-top))!important}
+button,select,.card{min-height:44px;cursor:pointer;touch-action:manipulation}
+@media(min-width:700px){.ar{font-size:34px}.grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}.opt{font-size:26px}}
+@media(max-width:380px){.ar{font-size:24px}.st{font-size:11px}}
+@media(hover:hover){button:hover,.card:hover{filter:brightness(1.2)}}body{margin:0;background:var(--g);color:var(--t);font-family:sans-serif}
 header{position:sticky;top:0;background:#062a1f;display:flex;gap:6px;padding:8px;align-items:center;z-index:2}
 header b{flex:1;font-family:Amiri;font-size:22px;color:var(--l)}
 .st{font-size:13px;opacity:.9}
@@ -62,7 +68,7 @@ function rr(hide){v.innerHTML=`<div class="bar"><button onclick="menu()">↩</bu
 function hideMode(){read(true)}
 const au=new Audio();let cur=-1,left=0;
 function play(i,keep){cur=i;if(!keep)left=(P.rep||1);document.querySelectorAll('.pl').forEach(b=>b.textContent='▶ استماع');const b=document.getElementById('pl'+i);if(b){b.textContent='🔊 ...';b.scrollIntoView({block:'center',behavior:'smooth'})}
-au.src='https://cdn.islamic.network/quran/audio/128/ar.alafasy/'+(i+1)+'.mp3';au.play().catch(()=>{if(b)b.textContent='⚠ لا اتصال'})}
+au.src='https://cdn.islamic.network/quran/audio/128/ar.alafasy/'+(i+1)+'.mp3';au.play().catch(e=>{if(b)b.textContent=e&&e.name=='NotAllowedError'?'▶ اضغط للتشغيل':'⚠ لا اتصال'})}
 au.onended=()=>{left--;if(left>0)return play(cur,true);const n=cur+1;if(P.auto&&n<6236&&pool.includes(A[n])){if(!document.getElementById('pl'+n)&&document.getElementById('pl'+cur)){lim+=40;rr(false)}play(n)}else document.querySelectorAll('.pl').forEach(b=>b.textContent='▶ استماع')};
 au.onerror=()=>{const b=document.getElementById('pl'+cur);if(b)b.textContent='⚠ لا اتصال'};
 function win(ok){if(ok){P.streak++;P.xp+=3;if(P.streak>P.best)P.best=P.streak}else P.streak=0;save()}
@@ -81,4 +87,5 @@ function blitz(){stopT();blz=true;score=0;tEnd=Date.now()+60000;tI=setInterval(t
 function tick(){if(!blz)return;const r=tEnd-Date.now(),t=document.getElementById('timer');if(t)t.style.width=Math.max(0,r/600)+'%';
 if(r<=0){clearInterval(tI);tI=null;blz=false;P.xp+=score*2;save();v.innerHTML=`<div class="ay" style="text-align:center"><div class="ar">انتهى الوقت!</div><div style="font-size:40px">${ar(score)}</div><p>Intahaa al-waqt</p><button onclick="blitz()">🔁 مرة أخرى</button> <button onclick="menu()">↩</button></div>`}}
 setPool('m',0);home();
+if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js');
 </script></body></html>

@@ -14,4 +14,5 @@ cp out/base.apk out/u.apk
 python3 -c "import zipfile;zipfile.ZipFile('out/u.apk','a').write('out/classes.dex','classes.dex')"
 $BT/zipalign -f 4 out/u.apk out/a.apk
 $BT/apksigner sign --ks "$KS" --ks-pass pass:android --out ../KnowBoran-Hifz.apk out/a.apk
+rm -rf ../docs && cp -r assets/www ../docs && touch ../docs/.nojekyll
 $BT/apksigner verify ../KnowBoran-Hifz.apk && echo "Built ../KnowBoran-Hifz.apk"

@@ -2,6 +2,8 @@
 
 A fast-paced, fully offline Quran memorization app for Android, with a green theme and an Arabic-first interface.
 
+**Use it in any browser (iPhone, iPad, Android, Surface, desktop):** https://mrbugimposter3-ship-it.github.io/Mevlanas/. To install it as an app, use Add to Home Screen; text works offline after the first load.
+
 ## Features
 - Complete Quran: 114 surahs, 6,236 ayat, in Uthmani script (right-to-left, Amiri font).
 - English transliteration under each ayah. No English translation: meaning comes from a short Arabic explanation (al-Tafsir al-Muyassar) per ayah.
@@ -11,11 +13,12 @@ A fast-paced, fully offline Quran memorization app for Android, with a green the
 - Per-ayah recitation by Mishary Rashid Alafasy, streamed (not bundled), with repeat-N and auto-play-next. Text works offline; audio needs internet.
 
 ## Install
-Download `releases/KnowBoran-Hifz-v1.1.apk` and sideload it. Android 7.0+ is required; it is debug-signed.
+Download `releases/KnowBoran-Hifz-v1.2.apk` and sideload it. Android 7.0+ is required; it is debug-signed.
 
 ## Build
 - `python3 prepare_data.py` downloads the text and regenerates `app/assets/www/quran.js`.
 - `./build.sh` is a Gradle-free build that needs JDK 17 and an Android SDK with `platforms;android-34` and `build-tools;34.0.0`.
+- `build.sh` also copies the web app to `docs/` (GitHub Pages, PWA with manifest and service worker).
 - The app itself is `app/assets/www/index.html` wrapped in a minimal WebView (`app/src`).
 
 ## Sources and licenses
