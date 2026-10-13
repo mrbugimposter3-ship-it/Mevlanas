@@ -1,6 +1,10 @@
 <!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>حفظ KnowBoran</title><meta name="theme-color" content="#062a1f"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><style>
 @font-face{font-family:Amiri;src:url(Amiri.ttf)}
+@font-face{font-family:NastaliqU;src:url(NotoNastaliqUrdu.ttf);font-display:swap}
+.ur{display:none;font-family:NastaliqU,'Noto Nastaliq Urdu','Jameel Noori Nastaleeq',serif;font-size:12px;line-height:2;direction:rtl;color:#bfe9d3;opacity:.9;font-weight:normal}
+body.urdu .ur{display:block}
+#uz.on{background:var(--l);color:#000}
 :root{--g:#0b3d2e;--g2:#14684a;--l:#2ecc71;--t:#e8fff3}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 #v{max-width:900px;margin:0 auto;padding-bottom:env(safe-area-inset-bottom)}
@@ -29,7 +33,7 @@ h3{margin:12px 10px 0;color:var(--l);font-family:Amiri}
 #timer{height:6px;background:var(--l);transition:width .2s linear}
 .blank{color:var(--l);border-bottom:2px dashed var(--l);padding:0 20px}
 </style></head><body>
-<header><b>حِفْظ</b><span class="st" id="stat"></span><button onclick="home()">⌂</button></header>
+<header><b>حِفْظ</b><span class="st" id="stat"></span><button id="uz" onclick="tU()" title="Urdu subtitles / اردو ترجمہ" lang="ur">اردو</button><button onclick="home()">⌂<span class="ur">ہوم</span></button></header>
 <div id="v"></div>
 <script src="quran.js"></script>
 <script>
@@ -86,6 +90,11 @@ function nx(){if(!blz)return;(Math.random()<.5?gap:nextA)()}
 function blitz(){stopT();blz=true;score=0;tEnd=Date.now()+60000;tI=setInterval(tick,200);nx()}
 function tick(){if(!blz)return;const r=tEnd-Date.now(),t=document.getElementById('timer');if(t)t.style.width=Math.max(0,r/600)+'%';
 if(r<=0){clearInterval(tI);tI=null;blz=false;P.xp+=score*2;save();v.innerHTML=`<div class="ay" style="text-align:center"><div class="ar">انتهى الوقت!</div><div style="font-size:40px">${ar(score)}</div><p>Intahaa al-waqt</p><button onclick="blitz()">🔁 مرة أخرى</button> <button onclick="menu()">↩</button></div>`}}
+const UR=[['قراءة','پڑھیں'],['إخفاء وكشف','چھپائیں اور دکھائیں'],['الكلمة الناقصة','غائب لفظ'],['الآية التالية','اگلی آیت'],['جولة سريعة','تیز راؤنڈ ۶۰ سیکنڈ'],['إخفاء الكل','سب چھپائیں'],['كشف الكل','سب دکھائیں'],['تكرار','دہرائیں'],['تشغيل تلقائي','خودکار چلائیں'],['التفسير الميسر','آسان تفسیر'],['استماع','سنیں'],['حفظت','یاد ہو گیا'],['المزيد','مزید'],['مرة أخرى','دوبارہ'],['اضغط للتشغيل','چلانے کے لیے دبائیں'],['لا اتصال','کنکشن نہیں'],['↩','واپس'],['⏸','روکیں'],['الكل','سب'],['الجزء','پارہ'],['النقاط','پوائنٹس'],['انتهى الوقت','وقت ختم']];
+function U(){document.querySelectorAll('button:not(#uz):not(.opt),summary,#v label,.card.hot,#v .bar>span,.ay>.ar').forEach(e=>{if(e.querySelector(':scope>.ur'))return;const t=[...e.childNodes].filter(n=>n.nodeType==3||n.tagName=='SMALL').map(n=>n.textContent).join(' ').trim();const m=UR.find(([a])=>t.includes(a));if(!m||(e.matches('.ay>.ar')&&!t.includes('انتهى')))return;const sp=document.createElement('span');sp.className='ur';sp.lang='ur';sp.textContent=m[1];e.appendChild(sp)})}
+function tU(){P.ur=!P.ur;save();aU()}
+function aU(){document.body.classList.toggle('urdu',!!P.ur);const b=document.getElementById('uz');b.classList.toggle('on',!!P.ur);b.setAttribute('aria-pressed',!!P.ur)}
+new MutationObserver(U).observe(document.body,{childList:true,subtree:true});aU();
 setPool('m',0);home();
 if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js');
 </script></body></html>

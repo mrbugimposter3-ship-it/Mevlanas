@@ -13,7 +13,7 @@ A fast-paced, fully offline Quran memorization app for Android, with a green the
 - Per-ayah recitation by Mishary Rashid Alafasy, streamed (not bundled), with repeat-N and auto-play-next. Text works offline; audio needs internet.
 
 ## Install
-Download `releases/KnowBoran-Hifz-v1.2.apk` and sideload it. Android 7.0+ is required; it is debug-signed.
+Download `releases/KnowBoran-Hifz-v1.3.apk` and sideload it. Android 7.0+ is required; it is debug-signed.
 
 ## Build
 - `python3 prepare_data.py` downloads the text and regenerates `app/assets/www/quran.js`.
