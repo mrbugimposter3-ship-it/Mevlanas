@@ -32,10 +32,24 @@ h3{margin:12px 10px 0;color:var(--l);font-family:Amiri}
 .ok{background:#1e8449!important}.bad{background:#7b241c!important}
 #timer{height:6px;background:var(--l);transition:width .2s linear}
 .blank{color:var(--l);border-bottom:2px dashed var(--l);padding:0 20px}
+footer{max-width:900px;margin:18px auto 0;padding:0 10px calc(14px + env(safe-area-inset-bottom))}
+.infaq{background:#0f4a37;border:1px solid #2a8c66;border-radius:12px;padding:10px}
+.infaq-h{display:flex;align-items:center;gap:6px}.infaq-t{flex:1;font-family:Amiri;color:var(--l);font-size:20px}.infaq-nav{display:flex;gap:6px}
+.infaq-b{padding:4px 14px;font-size:20px}
+.infaq-ar{display:block;font-family:Amiri;font-size:22px;line-height:2.1}
+.infaq-ref{display:block;color:var(--l);font-size:13px}
+body.urdu .infaq-ur{display:block;font-size:15px;line-height:2.5;margin:2px 0 4px}
+.infaq-all summary{cursor:pointer;color:#a8f0c8;margin-top:6px;min-height:32px}
+.infaq-all p{border-top:1px solid #1d5e45;margin:6px 0;padding-top:6px}
+.infaq-src{font-size:11px;opacity:.6;margin-top:6px}
+.infaq-tools{display:block;margin:12px 0 0;padding:8px 10px;font-size:13px;color:#bfe9d3;border:1px dashed #2a8c66;border-radius:10px}
+.infaq-tools a{color:var(--l);font-weight:bold}
+@media(min-width:700px){.infaq-ar{font-size:26px}}
 </style></head><body>
 <header><b>حِفْظ</b><span class="st" id="stat"></span><button id="uz" onclick="tU()" title="Urdu subtitles / اردو ترجمہ" lang="ur">اردو</button><button onclick="home()">⌂<span class="ur">ہوم</span></button></header>
 <div id="v"></div>
-<script src="quran.js"></script>
+<footer><section id="infaq"></section><p id="tools"></p></footer>
+<script src="quran.js"></script><script src="infaq.js"></script>
 <script>
 const S=Q.s,A=Q.a,v=document.getElementById('v');
 const P=JSON.parse(localStorage.hifz||'{"xp":0,"streak":0,"best":0,"day":"","days":0,"known":{}}');
@@ -96,5 +110,6 @@ function tU(){P.ur=!P.ur;save();aU()}
 function aU(){document.body.classList.toggle('urdu',!!P.ur);const b=document.getElementById('uz');b.classList.toggle('on',!!P.ur);b.setAttribute('aria-pressed',!!P.ur)}
 new MutationObserver(U).observe(document.body,{childList:true,subtree:true});aU();
 setPool('m',0);home();
+infaqMount(document.getElementById('infaq'),{ur:true});infaqTools(document.getElementById('tools'));
 if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js');
 </script></body></html>
